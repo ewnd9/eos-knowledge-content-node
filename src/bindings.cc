@@ -6,8 +6,6 @@
 #include "boxed.h"
 #include "function.h"
 #include "gobject.h"
-#include "engine.h"
-#include "domain.h"
 #include "mainloop.h"
 
 #include <string.h>
@@ -191,11 +189,6 @@ void InitModule(Local<Object> exports, Local<Value> module, void *priv) {
     exports->Set (String::NewFromUtf8 (isolate, "MakeBoxed"), FunctionTemplate::New (isolate, MakeBoxed)->GetFunction ());
     exports->Set (String::NewFromUtf8 (isolate, "BoxedFieldGetter"), FunctionTemplate::New (isolate, BoxedFieldGetter)->GetFunction ());
     exports->Set (String::NewFromUtf8 (isolate, "BoxedFieldSetter"), FunctionTemplate::New (isolate, BoxedFieldSetter)->GetFunction ());
-
-    exports->Set (String::NewFromUtf8 (isolate, "EngineGetObject"), FunctionTemplate::New (isolate, EngineGetObject)->GetFunction ());
-    exports->Set (String::NewFromUtf8 (isolate, "EngineQuery"), FunctionTemplate::New (isolate, EngineQuery)->GetFunction ());
-
-    exports->Set (String::NewFromUtf8 (isolate, "DomainReadURI"), FunctionTemplate::New (isolate, DomainReadURI)->GetFunction ());
 
     exports->Set (String::NewFromUtf8 (isolate, "StartGLibMainloop"), FunctionTemplate::New (isolate, StartGLibMainloop)->GetFunction ());
 }

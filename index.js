@@ -164,11 +164,11 @@ function makeInfo(info) {
         return makeStruct(info);
 }
 
-function importNS(ns) {
+function importNS(ns, version) {
     let module = {};
 
     let repo = GIRepository.Repository_get_default();
-    GIRepository.Repository_require.call(repo, ns, null, 0);
+    GIRepository.Repository_require.call(repo, ns, version, 0);
 
     let nInfos = GIRepository.Repository_get_n_infos.call(repo, ns);
     for (let i = 0; i < nInfos; i++) {
@@ -180,20 +180,7 @@ function importNS(ns) {
     return module;
 }
 
-const Eknc = importNS('EosKnowledgeContent');
-
-Eknc.start_glib_mainloop = bindings.StartGLibMainloop;
-
-// Setup promise functions
-Eknc.Engine.prototype.get_object_for_app = bindings.EngineGetObject;
-Eknc.Engine.prototype.get_object = function (id) {
-    return this.get_object_for_app(id, this.default_app_id);
+module.exports = {
+    importNS,
+    startGLibMainloop: bindings.StartGLibMainloop
 };
-Eknc.Engine.prototype.query = bindings.EngineQuery;
-
-// Primarily for setting up a 'ekn://' uri handler with electron
-Eknc.Domain.prototype.read_uri = function (uri) {
-    return bindings.DomainReadURI(this, uri);
-};
-
-module.exports = Eknc;

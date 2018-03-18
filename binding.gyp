@@ -8,18 +8,16 @@
         'src/function.cc',
         'src/gobject.cc',
         'src/boxed.cc',
-        'src/engine.cc',
-        'src/domain.cc',
         'src/mainloop.cc',
       ],
       'cflags': [
-        '<!@(pkg-config --cflags gobject-introspection-1.0 eos-knowledge-content-0)'
+        '<!@(pkg-config --cflags gobject-introspection-1.0)'
       ],
       'ldflags': [
-        '<!@(pkg-config --libs-only-L --libs-only-other gobject-introspection-1.0 eos-knowledge-content-0)',
+        '<!@(pkg-config --libs-only-L --libs-only-other gobject-introspection-1.0)',
       ],
       'libraries': [
-        '<!@(pkg-config --libs-only-l gobject-introspection-1.0 eos-knowledge-content-0)',
+        '<!@(pkg-config --libs-only-l gobject-introspection-1.0)',
       ],
     },
   ],
